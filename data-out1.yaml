@@ -1,0 +1,320 @@
+openapi: 3.0.1
+info:
+  version: 1.0-oas3
+  title: httpbin
+  description: An unofficial OpenAPI definition for [httpbin.org](https://httpbin.org).
+servers:
+  - url: https://httpbin.org
+  - url: http://httpbin.org
+  - url: https://eu.httpbin.org
+  - url: http://eu.httpbin.org
+tags:
+  - name: auth
+    description: Operations for testing various authentication types
+  - name: HTTP methods
+    description: Operations for testing different HTTP methods
+  - name: Status codes
+    description: >-
+      Return the specified HTTP status code, or a random status code if more
+      than one are given
+/another_workflow.http.post:
+  fn: com.biz.another_wf
+  data:
+    examples: null
+    schema:
+      body:
+        description: null
+        required: null
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customer_name:
+                  type: string
+              required:
+                - customer_name
+            examples:
+              '{example_name}':
+                summary: null
+                description: null
+                value: null
+                external_value: null
+            encoding: null
+      params:
+        - name: bank_id
+          in: query
+          required: false
+          allow_empty_value: false
+          description: null
+          schema:
+            type: string
+          examples: null
+  responses:
+    '200':
+      examples: null
+      schema:
+        data:
+          description: null
+          required: null
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customer_name:
+                    type: string
+                additionalProperties: true
+                required:
+                  - customer_name
+              examples:
+                example1:
+                  summary: null
+                  description: null
+                  value:
+                    application_id: PRM20478956N
+                  external_value: null
+              encoding: null
+/do_kyc/idfc.http.post:
+  fn: com.biz.create_hdfc_account
+  data:
+    examples: null
+    schema:
+      body:
+        description: null
+        required: null
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Gender:
+                  type: string
+              required:
+                - Gender
+            examples:
+              '{example_name}':
+                summary: null
+                description: null
+                value: null
+                external_value: null
+            encoding: null
+      params:
+        - name: bank_id
+          in: query
+          required: true
+          allow_empty_value: false
+          description: null
+          schema:
+            type: string
+          examples: null
+  responses:
+    '200':
+      examples: null
+      schema:
+        data:
+          description: null
+          required: null
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  application_id:
+                    type: string
+                required:
+                  - application_id
+              examples:
+                example1:
+                  summary: null
+                  description: null
+                  value:
+                    application_id: PRM20478956N
+                  external_value: null
+              encoding: null
+    '400':
+      examples: null
+      schema:
+        data:
+          description: null
+          required: null
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lender_response_code:
+                    type: string
+              examples:
+                example1:
+                  summary: null
+                  description: null
+                  value:
+                    lender_response_code: E001
+                  external_value: null
+              encoding: null
+/sub_wf.http.post:
+  fn: com.biz.sub_wf
+  data:
+    examples: null
+    schema:
+      body:
+        description: null
+        required: null
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customer_name:
+                  type: string
+              required:
+                - customer_name
+            examples:
+              '{example_name}':
+                summary: null
+                description: null
+                value: null
+                external_value: null
+            encoding: null
+  responses:
+    '200':
+      examples: null
+      schema:
+        data:
+          description: null
+          required: null
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customer_name:
+                    type: string
+                required:
+                  - customer_name
+              examples:
+                example1:
+                  summary: null
+                  description: null
+                  value:
+                    application_id: PRM20478956N
+                  external_value: null
+              encoding: null
+/create/:entity_type.http.post:
+  fn: com.biz.ds.create_and_show
+  data:
+    schema:
+      params:
+        - name: entity_type
+          in: path
+          required: true
+          allow_empty_value: false
+          description: the type of entity to create and find later
+          schema:
+            type: string
+          examples:
+            sample_entity_type: user
+      body:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                  required:
+                    - data
+                db:
+                  type: string
+              required:
+                - data
+                - db
+            examples:
+              create_user:
+                db: mongo
+                data:
+                  data:
+                    name: Rajesh
+                    email: rfd@gmail.com
+                    posts:
+                      create:
+                        title: Swecond post!
+                        slug: dfourth_post
+                        description: some description
+                        body: Hello World!
+                    profile:
+                      create:
+                        bio: google.com
+/ds/:entity_type.http.get:
+  fn: com.biz.ds.cross_db_join
+  data:
+    schema:
+      params:
+        - name: entity_type
+          in: path
+          required: true
+          allow_empty_value: false
+          description: the type of entity to create and find later
+          schema:
+            type: string
+          examples:
+            sample_entity_type: user
+      body:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    where:
+                      type: object
+                  required:
+                    - where
+              required:
+                - data
+            examples:
+              search_user:
+                data:
+                  where:
+                    email: rfd@gmail.com
+/helloworld.http.get:
+  fn: com.biz.helloworld
+/parallel_test.http.post:
+  fn: com.biz.create_parallel
+  data:
+    examples: null
+    schema:
+      body:
+        description: null
+        required: null
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Gender:
+                  type: string
+            examples:
+              '{example_name}':
+                summary: null
+                description: null
+                value: null
+                external_value: null
+            encoding: null
+      params:
+        - name: bank_id
+          in: path
+          required: false
+          allow_empty_value: false
+          description: null
+          schema:
+            type: string
+          examples: null
+/v1/prisma_test/:entity_type.http.post:
+  fn: com.biz.test_mongo
