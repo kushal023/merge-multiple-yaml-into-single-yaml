@@ -1,238 +1,249 @@
 openapi: 3.0.1
 info:
-  version: 1.0-oas3
+  version: '1.0-oas3'
   title: httpbin
   description: An unofficial OpenAPI definition for [httpbin.org](https://httpbin.org).
+
 servers:
   - url: https://httpbin.org
   - url: http://httpbin.org
   - url: https://eu.httpbin.org
   - url: http://eu.httpbin.org
+
 tags:
   - name: auth
     description: Operations for testing various authentication types
   - name: HTTP methods
     description: Operations for testing different HTTP methods
   - name: Status codes
-    description: >-
-      Return the specified HTTP status code, or a random status code if more
-      than one are given
-/another_workflow.http.post:
+    description: Return the specified HTTP status code, or a random status code if more than one are given
+'/another_workflow.http.post': # event id. Will include path params. For ex. com.abc.do_kyc/{bank_id}/process/{user_id}
   fn: com.biz.another_wf
-  data:
-    examples: null
+  data: 
+    examples: # <string, ExampleObject>
     schema:
-      body:
-        description: null
-        required: null
+      body: 
+        description:
+        required: # default value is false
         content:
-          application/json:
-            schema:
+          application/json: # For ex. application/json application/xml
+            schema: 
               type: object
               properties:
-                customer_name:
+                customer_name: 
                   type: string
-              required:
-                - customer_name
-            examples:
+              #additionalProperties: false
+              required: [customer_name]
+            examples: # <string, ExampleObject>
               '{example_name}':
-                summary: null
-                description: null
-                value: null
-                external_value: null
-            encoding: null
-      params:
+                summary:
+                description:
+                value: # anyGSCLoudEvent
+                external_value:
+            encoding:
+      params: # can come from path, query, headers
         - name: bank_id
-          in: query
+          in: query # same as open api spec: one of cookie, path, query, header
           required: false
           allow_empty_value: false
-          description: null
+          description:
           schema:
             type: string
-          examples: null
-  responses:
-    '200':
-      examples: null
+          examples:
+  responses: 
+    200:
+      examples: # <string, ExampleObject>
       schema:
-        data:
-          description: null
-          required: null
+        data: 
+          description:
+          required: # default value is false
           content:
-            application/json:
-              schema:
+            application/json: # For ex. application/json application/xml
+              schema: 
                 type: object
                 properties:
-                  customer_name:
+                  customer_name: 
                     type: string
                 additionalProperties: true
-                required:
-                  - customer_name
-              examples:
+                required: [customer_name]
+              examples: # <string, ExampleObject>
                 example1:
-                  summary: null
-                  description: null
-                  value:
+                  summary:
+                  description:
+                  value: 
                     application_id: PRM20478956N
-                  external_value: null
-              encoding: null
-/do_kyc/idfc.http.post:
+                  external_value:
+              encoding:
+'/do_kyc/idfc.http.post': # event id. Will include path params. For ex. com.abc.do_kyc/{bank_id}/process/{user_id}
   fn: com.biz.create_hdfc_account
-  data:
-    examples: null
+  data: 
+    examples: # <string, ExampleObject>
     schema:
-      body:
-        description: null
-        required: null
+      body: 
+        description:
+        required: # default value is false
         content:
-          application/json:
-            schema:
+          application/json: # For ex. application/json application/xml
+            schema: 
               type: object
               properties:
-                Gender:
+                Gender: 
                   type: string
-              required:
-                - Gender
-            examples:
+              #additionalProperties: false
+              required: [Gender]
+            examples: # <string, ExampleObject>
               '{example_name}':
-                summary: null
-                description: null
-                value: null
-                external_value: null
-            encoding: null
-      params:
+                summary:
+                description:
+                value: # anyGSCLoudEvent
+                external_value:
+            encoding:
+      params: # can come from path, query, headers
         - name: bank_id
-          in: query
+          in: query # same as open api spec: one of cookie, path, query, header
           required: true
           allow_empty_value: false
-          description: null
+          description:
           schema:
             type: string
-          examples: null
-  responses:
-    '200':
-      examples: null
+          examples:
+  responses: 
+    200:
+      examples: # <string, ExampleObject>
       schema:
-        data:
-          description: null
-          required: null
+        data: 
+          description:
+          required: # default value is false
           content:
-            application/json:
-              schema:
+            application/json: # For ex. application/json application/xml
+              schema: 
                 type: object
                 properties:
-                  application_id:
+                  application_id: 
                     type: string
-                required:
-                  - application_id
-              examples:
+                #additionalProperties: false
+                required: [application_id]
+              examples: # <string, ExampleObject>
                 example1:
-                  summary: null
-                  description: null
-                  value:
+                  summary:
+                  description:
+                  value: 
                     application_id: PRM20478956N
-                  external_value: null
-              encoding: null
-    '400':
-      examples: null
+                  external_value:
+              encoding:
+    400:
+      examples: # <string, ExampleObject>
       schema:
-        data:
-          description: null
-          required: null
+        data: 
+          description:
+          required: # default value is false
           content:
-            application/json:
-              schema:
+            application/json: # For ex. application/json application/xml
+              schema: 
                 type: object
                 properties:
-                  lender_response_code:
+                  lender_response_code: 
                     type: string
-              examples:
+              examples: # <string, ExampleObject>
                 example1:
-                  summary: null
-                  description: null
-                  value:
+                  summary:
+                  description:
+                  value: 
                     lender_response_code: E001
-                  external_value: null
-              encoding: null
-/sub_wf.http.post:
+                  external_value:
+              encoding:
+
+# A note on components
+
+# Components
+# We use components like open api spec, to define the reusable components across the following categories
+# These components are aimed to be reused across events, functions, datasources.
+# For examples, schemas, responses, examples, parameters, requestBodies, headers, events, functions, datasources. There could be more types of components as per developer need, for any reusable piece of YAML
+# ANY YAML file can have a components key. One can create and reference components in the same file or across files.
+# https://davidgarcia.dev/posts/how-to-split-open-api-spec-into-multiple-files/
+# One can use . .. # as per conventional usage.
+# ./components/samples/sample1
+# ../components/samples/sample1
+# #/components/samples/sample1
+## ABOUT $ref
+# $ref: '#/components/schemas/Address''/sub_wf.http.post': 
   fn: com.biz.sub_wf
-  data:
-    examples: null
+  data: 
+    examples: # <string, ExampleObject>
     schema:
-      body:
-        description: null
-        required: null
+      body: 
+        description:
+        required: # default value is false
         content:
-          application/json:
-            schema:
+          application/json: # For ex. application/json application/xml
+            schema: 
               type: object
               properties:
-                customer_name:
+                customer_name: 
                   type: string
-              required:
-                - customer_name
-            examples:
+              #additionalProperties: false
+              required: [customer_name]
+            examples: # <string, ExampleObject>
               '{example_name}':
-                summary: null
-                description: null
-                value: null
-                external_value: null
-            encoding: null
-  responses:
-    '200':
-      examples: null
+                summary:
+                description:
+                value: # anyGSCLoudEvent
+                external_value:
+            encoding:
+  responses: 
+    200:
+      examples: # <string, ExampleObject>
       schema:
-        data:
-          description: null
-          required: null
+        data: 
+          description:
+          required: # default value is false
           content:
-            application/json:
-              schema:
+            application/json: # For ex. application/json application/xml
+              schema: 
                 type: object
                 properties:
-                  customer_name:
+                  customer_name: 
                     type: string
-                required:
-                  - customer_name
-              examples:
+                #additionalProperties: true
+                required: [customer_name]
+              examples: # <string, ExampleObject>
                 example1:
-                  summary: null
-                  description: null
-                  value:
+                  summary:
+                  description:
+                  value: 
                     application_id: PRM20478956N
-                  external_value: null
-              encoding: null
+                  external_value:
+              encoding:
 /create/:entity_type.http.post:
   fn: com.biz.ds.create_and_show
   data:
     schema:
-      params:
+      params: # can come from path, query, headers
         - name: entity_type
-          in: path
+          in: path # same as open api spec: one of cookie, path, query, header
           required: true
           allow_empty_value: false
           description: the type of entity to create and find later
           schema:
             type: string
           examples:
-            sample_entity_type: user
+            sample_entity_type: #name of the example
+              user
       body:
         content:
           application/json:
             schema:
               type: object
               properties:
-                data:
+                data: 
                   type: object
                   properties:
-                    data:
+                    data: 
                       type: object
-                  required:
-                    - data
+                  required: [data]
                 db:
                   type: string
-              required:
-                - data
-                - db
+              required: [data,db]
             examples:
               create_user:
                 db: mongo
@@ -248,21 +259,21 @@ tags:
                         body: Hello World!
                     profile:
                       create:
-                        bio: google.com
-/ds/:entity_type.http.get:
+                        bio: google.com/ds/:entity_type.http.get:
   fn: com.biz.ds.cross_db_join
   data:
     schema:
-      params:
+      params: # can come from path, query, headers
         - name: entity_type
-          in: path
+          in: path # same as open api spec: one of cookie, path, query, header
           required: true
           allow_empty_value: false
           description: the type of entity to create and find later
           schema:
             type: string
           examples:
-            sample_entity_type: user
+            sample_entity_type: #name of the example
+              user
       body:
         content:
           application/json:
@@ -272,49 +283,48 @@ tags:
                 data:
                   type: object
                   properties:
-                    where:
+                    where: 
                       type: object
-                  required:
-                    - where
-              required:
-                - data
+                  required: [where]
+              required: [data]
             examples:
               search_user:
                 data:
                   where:
-                    email: rfd@gmail.com
-/helloworld.http.get:
-  fn: com.biz.helloworld
-/parallel_test.http.post:
+                    email: rfd@gmail.com'/helloworld.http.get': # event id. Will include path params. For ex. com.abc.do_kyc/{bank_id}/process/{user_id}
+  fn: com.biz.helloworld'/parallel_test.http.post': # event id. Will include path params. For ex. com.abc.do_kyc/{bank_id}/process/{user_id}
   fn: com.biz.create_parallel
-  data:
-    examples: null
+  data: 
+    examples: # <string, ExampleObject>
     schema:
-      body:
-        description: null
-        required: null
+      body: 
+        description:
+        required: # default value is false
         content:
-          application/json:
-            schema:
+          application/json: # For ex. application/json application/xml
+            schema: 
               type: object
               properties:
-                Gender:
+                Gender: 
                   type: string
-            examples:
+              #additionalProperties: false
+              #required: [id]
+            examples: # <string, ExampleObject>
               '{example_name}':
-                summary: null
-                description: null
-                value: null
-                external_value: null
-            encoding: null
-      params:
+                summary:
+                description:
+                value: # anyGSCLoudEvent
+                external_value:
+            encoding:
+      params: # can come from path, query, headers
         - name: bank_id
-          in: path
+          in: path # same as open api spec: one of cookie, path, query, header
           required: false
           allow_empty_value: false
-          description: null
+          description:
           schema:
             type: string
-          examples: null
+          examples:
+  
 /v1/prisma_test/:entity_type.http.post:
   fn: com.biz.test_mongo

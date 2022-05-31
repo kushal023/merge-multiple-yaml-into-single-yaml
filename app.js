@@ -1,9 +1,6 @@
 // const fs = require('fs');
 const fs = require('fs-extra');
-const yaml = require('js-yaml');
 const path = require('path');
-const resolve = require('path').resolve;
-const merge = require('@alexlafroscia/yaml-merge');
 
 function addMultipleYamlFileIntoSingleYamlFile(nameOfDir) {
     //joining path of directory 
@@ -16,8 +13,11 @@ function addMultipleYamlFileIntoSingleYamlFile(nameOfDir) {
         }
         //listing all files using forEach
         files.forEach(function (file) {
-            const output = merge(resolve(directoryPath + "/" + file));
-         fs.appendFileSync('data-out1.yaml', output)
+
+            const data = fs.readFileSync(directoryPath+'/'+file,
+              {encoding:'utf8', flag:'r'});
+        
+            fs.appendFileSync('data-out1.yaml', data)
 
         });
     });
