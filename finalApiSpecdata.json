@@ -1,0 +1,272 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "This is my SWAGGER",
+    "description": "This is my documentation made by me",
+    "version": 1,
+    "contact": { "email": "kushal@mindgrep.com" },
+    "liscence": { "name": "Apache 2.0", "url": "http://apache.org/" },
+    "servers": {
+      "-url": "http://company.com/",
+      "description": "This is my company server"
+    }
+  },
+  "schemes": ["http", "https"],
+  "paths": {
+    "/another_workflow": {
+      "post": {
+        "responses": {
+          "200": {
+            "examples": null,
+            "schema": {
+              "data": {
+                "description": null,
+                "required": null,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "customer_name": { "type": "string" }
+                      },
+                      "additionalProperties": true,
+                      "required": ["customer_name"]
+                    },
+                    "examples": {
+                      "example1": {
+                        "summary": null,
+                        "description": null,
+                        "value": { "application_id": "PRM20478956N" },
+                        "external_value": null
+                      }
+                    },
+                    "encoding": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": {
+          "description": null,
+          "required": null,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer_name": { "type": "string" }
+                },
+                "required": ["customer_name"]
+              },
+              "examples": {
+                "{example_name}": {
+                  "summary": null,
+                  "description": null,
+                  "value": null,
+                  "external_value": null
+                }
+              },
+              "encoding": null
+            }
+          }
+        }
+      }
+    },
+    "/do_kyc/idfc": {
+      "post": {
+        "responses": {
+          "200": {
+            "examples": null,
+            "schema": {
+              "data": {
+                "description": null,
+                "required": null,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "application_id": { "type": "string" }
+                      },
+                      "required": ["application_id"]
+                    },
+                    "examples": {
+                      "example1": {
+                        "summary": null,
+                        "description": null,
+                        "value": { "application_id": "PRM20478956N" },
+                        "external_value": null
+                      }
+                    },
+                    "encoding": null
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "examples": null,
+            "schema": {
+              "data": {
+                "description": null,
+                "required": null,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "lender_response_code": { "type": "string" }
+                      }
+                    },
+                    "examples": {
+                      "example1": {
+                        "summary": null,
+                        "description": null,
+                        "value": { "lender_response_code": "E001" },
+                        "external_value": null
+                      }
+                    },
+                    "encoding": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": {
+          "description": null,
+          "required": null,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": { "Gender": { "type": "string" } },
+                "required": ["Gender"]
+              },
+              "examples": {
+                "{example_name}": {
+                  "summary": null,
+                  "description": null,
+                  "value": null,
+                  "external_value": null
+                }
+              },
+              "encoding": null
+            }
+          }
+        }
+      }
+    },
+    "/sub_wf": {
+      "post": {
+        "responses": {
+          "200": {
+            "examples": null,
+            "schema": {
+              "data": {
+                "description": null,
+                "required": null,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "customer_name": { "type": "string" }
+                      },
+                      "required": ["customer_name"]
+                    },
+                    "examples": {
+                      "example1": {
+                        "summary": null,
+                        "description": null,
+                        "value": { "application_id": "PRM20478956N" },
+                        "external_value": null
+                      }
+                    },
+                    "encoding": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": {
+          "description": null,
+          "required": null,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer_name": { "type": "string" }
+                },
+                "required": ["customer_name"]
+              },
+              "examples": {
+                "{example_name}": {
+                  "summary": null,
+                  "description": null,
+                  "value": null,
+                  "external_value": null
+                }
+              },
+              "encoding": null
+            }
+          }
+        }
+      }
+    },
+    "/parallel_test": {
+      "post": {
+        "parameters": {
+          "description": null,
+          "required": null,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": { "Gender": { "type": "string" } }
+              },
+              "examples": {
+                "{example_name}": {
+                  "summary": null,
+                  "description": null,
+                  "value": null,
+                  "external_value": null
+                }
+              },
+              "encoding": null
+            }
+          }
+        }
+      }
+    },
+    "/switch_test": {
+      "post": {
+        "parameters": {
+          "description": null,
+          "required": null,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": { "Gender": { "type": "string" } },
+                "required": ["condition"]
+              },
+              "examples": {
+                "{example_name}": {
+                  "summary": null,
+                  "description": null,
+                  "value": null,
+                  "external_value": null
+                }
+              },
+              "encoding": null
+            }
+          }
+        }
+      }
+    }
+  }
+}
